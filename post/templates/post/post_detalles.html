@@ -1,0 +1,21 @@
+{% extends "post/base.html" %}
+
+{% block title %}{{ post.titulo }}{% endblock %}
+
+{% block content %}
+  <article>
+    <h2>{{ post.titulo }}</h2>
+    <p>Publicado el: {{ post.fecha_publicacion|date:"d M Y H:i" }}</p>
+    {% if post.autor %}
+      <p>Autor: {{ post.autor }}</p>
+    {% endif %}
+    <div>{{ post.contenido }}</div>
+  </article>
+
+  {% if user == post.autor %}
+   <a href="{% url 'post:post_editar' post.id %}" class="btn btn-warning">Editar</a> 
+   <a href="{% url 'post:post_eliminar' post.id %}" class="btn btn-danger">Eliminar</a>
+  {% endif %}
+
+  <a href="{% url 'post:post_listado' %}">Volver a la lista de publicaciones</a>
+{% endblock %}

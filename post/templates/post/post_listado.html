@@ -1,0 +1,20 @@
+{% extends "post/base.html" %}
+
+{% block title %}Publicaciones del Blog{% endblock %}
+
+{% block content %}
+  <h2>Publicaciones Recientes</h2>
+  <ul>
+    {% for post in posts %}
+      <li>
+        <h3><a href="{% url 'post:post_detalles' post.id %}">{{ post.titulo }}</a></h3>
+        <p>Publicado el: {{ post.fecha_publicacion|date:"d M Y H:i" }}</p>
+        {% if post.autor %}
+          <p>Autor: {{ post.autor }}</p>
+        {% endif %}
+      </li>
+    {% empty %}
+      <p>No hay publicaciones disponibles.</p>
+    {% endfor %}
+  </ul>
+{% endblock %}
